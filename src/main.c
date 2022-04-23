@@ -1,26 +1,38 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-struct Dados{
+typedef struct dados{
 	float data;
-	struct Dados * next; 
-};
+	struct dados * next; 
+}Dados;
 
-struct Dados * first = NULL;
-struct Dados * last = NULL;
+Dados * first = NULL;
+Dados * last = NULL;
 
 void Init(float data);
-void printList();
+void PrintList(Dados * aux);
 void Menu();
+void FreeList();
+
+int main(){
+	printf("\t Lets do this ¯\\_(ツ)_/¯ \n");
+	Menu();	
+	FreeList();
+	printf(" Goodbye \U0001f984 \n");
+	last = NULL;
+	first = NULL;
+	return 0;
+}
 
 void Init(float data){
-	struct Dados * aux = NULL;
-	struct Dados * auxcp = NULL;
-	aux = (struct Dados*)malloc(sizeof(struct Dados));
-	auxcp = (struct Dados*)malloc(sizeof(struct Dados));
+	Dados * aux;
+	//struct Dados * auxcp;
+	aux = (Dados*)malloc(sizeof(Dados));
+	//auxcp = (struct Dados*)malloc(sizeof(struct Dados));
 	if(first==NULL){
-		first = (struct Dados*)malloc(sizeof(struct Dados));
-		first->data = data;
+		//first = (struct Dados*)malloc(sizeof(struct Dados));
+		aux->data = data;
+		first = aux;
 		first->next = NULL;
 		printf("\n\tFirst = NULL : first->data = %f\n",first->data);
 		printf("\n\tLast adress : %p\n\tFirst Next adress : %p\n",&last,&first->next);
@@ -28,39 +40,45 @@ void Init(float data){
 		printf("\n\tFirst != NULL\n");
 		if(last == NULL){
 			printf("\n\tLast == NULL : ");
-			last = (struct Dados*)malloc(sizeof(struct Dados));
-			last->data = data;
+			//last = (struct Dados*)malloc(sizeof(struct Dados));
+			aux->data = data;
+			last = aux;
 			last->next = NULL;
 			printf("last->data = %f\n", last->data);
 			first->next = last;
-			struct Dados * temp;
+			Dados * temp;
 			temp = first->next;
 			printf("First next data : %f\n",temp->data); 
+			//free(temp);
 		}else if(last != NULL) {
 			printf("\n\tLast != NULL : ");
-			struct Dados * temp;                                       temp = first->next;                                        printf("First next data : %f\n",temp->data);
-			aux = (struct Dados*)malloc(sizeof(struct Dados));
+			Dados * temp;
+			temp = first->next;
+			printf("First next data : %f\n",temp->data);
+			//aux = (struct Dados*)malloc(sizeof(struct Dados));
 			//--------------------------
-			auxcp = last;
-	
-			 
+			//auxcp = last;
+				 
 			aux->data = data;
-			aux->next = NULL;
+			//aux->next = NULL;
 
 			last->next = aux;
 			last = aux;
 			
-			
-			
 			printf("last->data = %f\n",last->data);
+			//free(aux);
+			last->next = NULL;
 		}
 	}else {
 		printf("¯\\_(ツ)_/¯");
-	}
+	}	
+	
+	free(aux);
+	//free(auxcp);
 }
 
 void Menu(){
-	char* options = "\n\t1 - Insert node\n\t2 - Print List\n\t5 - Exit\n";
+	char* options = "\n\t1 - Insert node\n\t2 - Print List\n\t3 - Free list\n\t5 - Exit\n";
 	int option = 0;
 	float data = 0;
 	do{
@@ -73,7 +91,10 @@ void Menu(){
 				Init(data);
 				break;
 			case 2:
-				printList(first);
+				PrintList(first);
+				break;
+			case 3:
+				FreeList();
 				break;
 			case 5:
 				printf("Exiting...");
@@ -84,19 +105,23 @@ void Menu(){
 	}while(option != 5);
 }
 		
-void printList(struct Dados * aux){
-	struct Dados * str = NULL;
+void PrintList(Dados * aux){
+	//struct Dados * str = NULL;
 	//aux = str;
 	while(aux != NULL){
 		printf("%f\n",aux->data);
 		aux = aux->next;
 	}
 	//printf("\n%f\n",str->data);
+	free(aux);
 }
 
-int main(){
-	printf("\t Lets do this ¯\\_(ツ)_/¯ \n");
-	Menu();
-	printf(" Goodbye \U0001f984 \n");
-	return 0;
+void FreeList(){
+    Dados * aux = first;
+    while(first!=NULL){
+		aux = first;
+        first=first->next;
+    }
+    printf("\nList free'd\n");	
+	//printf("Last:%f ",last->data);
 }
