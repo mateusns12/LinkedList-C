@@ -28,44 +28,44 @@ void Init(float data){
 	Dados * aux;
 	//struct Dados * auxcp;
 	aux = (Dados*)malloc(sizeof(Dados));
+	aux->data = data;
 	//auxcp = (struct Dados*)malloc(sizeof(struct Dados));
 	if(first==NULL){
 		//first = (struct Dados*)malloc(sizeof(struct Dados));
-		aux->data = data;
 		first = aux;
-		first->next = NULL;
-		printf("\n\tFirst = NULL : first->data = %f\n",first->data);
-		printf("\n\tLast adress : %p\n\tFirst Next adress : %p\n",&last,&first->next);
+		//first->next = NULL;
+		//printf("\n\tFirst = NULL : first->data = %f\n",first->data);
+		//printf("\n\tLast adress : %p\n\tFirst Next adress : %p\n",&last,&first->next);
 	}else if(first != NULL){
-		printf("\n\tFirst != NULL\n");
+		//printf("\n\tFirst != NULL\n");
 		if(last == NULL){
-			printf("\n\tLast == NULL : ");
+			//printf("\n\tLast == NULL : ");
 			//last = (struct Dados*)malloc(sizeof(struct Dados));
-			aux->data = data;
+			
 			last = aux;
 			last->next = NULL;
-			printf("last->data = %f\n", last->data);
+			//printf("last->data = %f\n", last->data);
 			first->next = last;
 			Dados * temp;
 			temp = first->next;
-			printf("First next data : %f\n",temp->data); 
+			//printf("First next data : %f\n",temp->data); 
 			//free(temp);
 		}else if(last != NULL) {
-			printf("\n\tLast != NULL : ");
+			//printf("\n\tLast != NULL : ");
 			Dados * temp;
 			temp = first->next;
-			printf("First next data : %f\n",temp->data);
+			//printf("First next data : %f\n",temp->data);
 			//aux = (struct Dados*)malloc(sizeof(struct Dados));
 			//--------------------------
 			//auxcp = last;
 				 
-			aux->data = data;
+			
 			//aux->next = NULL;
 
 			last->next = aux;
-			last = aux;
+			last = last->next;
 			
-			printf("last->data = %f\n",last->data);
+			//printf("last->data = %f\n",last->data);
 			//free(aux);
 			last->next = NULL;
 		}
