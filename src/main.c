@@ -15,66 +15,30 @@ void Menu();
 void FreeList();
 
 int main(){
-	printf("\t Lets do this ¯\\_(ツ)_/¯ \n");
+	printf("\n\t Lets do this ¯\\_(ツ)_/¯ \n");
 	Menu();	
 	FreeList();
-	printf(" Goodbye \U0001f984 \n");
+	printf("\nGoodbye \U0001f984 \n");
 	last = NULL;
 	first = NULL;
 	return 0;
 }
 
 void Init(float data){
-	Dados * aux;
-	//struct Dados * auxcp;
-	aux = (Dados*)malloc(sizeof(Dados));
+	Dados * aux = (Dados*)malloc(sizeof(Dados));
 	aux->data = data;
-	//auxcp = (struct Dados*)malloc(sizeof(struct Dados));
 	if(first==NULL){
-		//first = (struct Dados*)malloc(sizeof(struct Dados));
 		first = aux;
-		//first->next = NULL;
-		//printf("\n\tFirst = NULL : first->data = %f\n",first->data);
-		//printf("\n\tLast adress : %p\n\tFirst Next adress : %p\n",&last,&first->next);
-	}else if(first != NULL){
-		//printf("\n\tFirst != NULL\n");
-		if(last == NULL){
-			//printf("\n\tLast == NULL : ");
-			//last = (struct Dados*)malloc(sizeof(struct Dados));
-			
-			last = aux;
-			last->next = NULL;
-			//printf("last->data = %f\n", last->data);
-			first->next = last;
-			Dados * temp;
-			temp = first->next;
-			//printf("First next data : %f\n",temp->data); 
-			//free(temp);
-		}else if(last != NULL) {
-			//printf("\n\tLast != NULL : ");
-			Dados * temp;
-			temp = first->next;
-			//printf("First next data : %f\n",temp->data);
-			//aux = (struct Dados*)malloc(sizeof(struct Dados));
-			//--------------------------
-			//auxcp = last;
-				 
-			
-			//aux->next = NULL;
-
-			last->next = aux;
-			last = last->next;
-			
-			//printf("last->data = %f\n",last->data);
-			//free(aux);
-			last->next = NULL;
-		}
+		last = first;	
+		//free(aux);	
 	}else {
-		printf("¯\\_(ツ)_/¯");
-	}	
+		last->next = aux;
+		last = last->next;
+		//free(aux);
+	}last->next = NULL;	
+	//printf("¯\\_(ツ)_/¯");
+	free(aux);	
 	
-	free(aux);
-	//free(auxcp);
 }
 
 void Menu(){
@@ -105,23 +69,3 @@ void Menu(){
 	}while(option != 5);
 }
 		
-void PrintList(Dados * aux){
-	//struct Dados * str = NULL;
-	//aux = str;
-	while(aux != NULL){
-		printf("%f\n",aux->data);
-		aux = aux->next;
-	}
-	//printf("\n%f\n",str->data);
-	free(aux);
-}
-
-void FreeList(){
-    Dados * aux = first;
-    while(first!=NULL){
-		aux = first;
-        first=first->next;
-    }
-    printf("\nList free'd\n");	
-	//printf("Last:%f ",last->data);
-}

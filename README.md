@@ -13,8 +13,9 @@ Simple Linked List in C. Just plain basic implementation out of my  head, to rem
 
 # To-do
 - [ ] Implement Stack (FIFO)
-- [X] Implement Deletion
-- [ ] Implement Insertion in place and Delete Selected Methods
+- [ ] Implement Deletion
+- [ ] Implement Insertion in place 
+- [ ] Implement Delete Selected Methods
 - [X] Create typedef for struct 
 - [ ] Implement union
 - [ ] Save list to file (sqlite3)
