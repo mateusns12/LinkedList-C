@@ -26,6 +26,7 @@ Generic methods allows to reuse code to create different types of lists. Queue a
 
 # Notes 
 
+- Fixed SIGSEV error, when trying to remove a node wich doesnt exist;
 - The current List is a queue, where the first is always first, and new members are put in the end of the list.(Last In First Out)
 - "first" pointer and "last" pointer keeps track of the data in their respective positions.
 
