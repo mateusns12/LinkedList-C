@@ -107,6 +107,7 @@ void Delete(){
 void RemoveSelected(){
     Data * aux = first;
     Data * actual = aux;
+    int found = 0;
     char * str = malloc(20 * sizeof(char));
     scanf("%s",str);
     if(aux==NULL){
@@ -126,14 +127,18 @@ void RemoveSelected(){
         while(aux->next!=NULL){
             actual = aux;
             if(!strcmp(aux->next->string,str)){
+                Data * save = aux->next->next;
+                free(aux->next->string);
+                free(aux->next);
+                actual->next = save;
+                found = 1;
                 break;
             }
             aux = aux->next;
         }      
-        Data * save = aux->next->next;
-        free(aux->next->string);
-        free(aux->next);
-        actual->next = save;
+        if(!found){
+            printf("\nNot Found\n");
+        }
     }  
     free(str);
 }
