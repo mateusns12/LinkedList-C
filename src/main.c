@@ -109,20 +109,26 @@ void RemoveSelected(){
     Data * actual = aux;
     int found = 0;
     char * str = malloc(20 * sizeof(char));
+    printf("\nEnter string: ");
     scanf("%s",str);
     if(aux==NULL){
         printf("\nList empty");
     }else if(!strcmp(aux->string,str)){
+        found = 1;
         Data * save = first->next;
         free(first->string);
         free(first);
         first = NULL;
         first = save;
-    }else if(!strcmp(aux->next->string,str) && aux->next == last){
-        free(last->string);
-        free(last);
-        first->next = NULL;
-        last = first;
+    }else if(aux->next != NULL){
+        if (!strcmp(aux->next->string,str) && aux->next == last){
+            printf("falling");
+            found = 1;
+            free(last->string);
+            free(last);
+            first->next = NULL;
+            last = first;
+        }        
     }else{        
         while(aux->next!=NULL){
             actual = aux;
@@ -135,11 +141,10 @@ void RemoveSelected(){
                 break;
             }
             aux = aux->next;
-        }      
-        if(!found){
-            printf("\nNot Found\n");
-        }
-    }  
+        }  
+    }if(found==0){
+        printf("\nNot Found\n");
+    }
     free(str);
 }
 
