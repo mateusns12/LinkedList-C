@@ -86,6 +86,10 @@ void Insert(float data, char string[]){
 		
 void Print(){
 	Data * aux = first;
+    if(aux==NULL){
+        printf("\nList empty\n");
+        return;
+    }
     while(aux!=NULL){
         printf("\n\tObject value: %f\n\tObject string: %s\n",aux->data,aux->string);
 		//printf("\n\tObject value: %f\n",aux->data);
@@ -96,6 +100,9 @@ void Print(){
 
 void Delete(){
     Data * aux = first;
+    if(aux==NULL){
+        return;
+    }
     while(first!=NULL){
         aux = first->next;
         free(first->string);
@@ -106,29 +113,22 @@ void Delete(){
 
 void RemoveSelected(){
     Data * aux = first;
+    if(aux==NULL){
+        printf("\nList empty\n");
+        return;
+    }
     Data * actual = aux;
     int found = 0;
     char * str = malloc(20 * sizeof(char));
     printf("\nEnter string: ");
     scanf("%s",str);
-    if(aux==NULL){
-        printf("\nList empty");
-    }else if(!strcmp(aux->string,str)){
+    if(!strcmp(aux->string,str)){
         found = 1;
         Data * save = first->next;
         free(first->string);
         free(first);
         first = NULL;
         first = save;
-    }else if(aux->next != NULL){
-        if (!strcmp(aux->next->string,str) && aux->next == last){
-            printf("falling");
-            found = 1;
-            free(last->string);
-            free(last);
-            first->next = NULL;
-            last = first;
-        }        
     }else{        
         while(aux->next!=NULL){
             actual = aux;
